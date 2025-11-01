@@ -1,7 +1,7 @@
 {
   "name": "002-typescript",
   "version": "1.0.0",
-  "description": "**Правила выполнения домашней работы:**  \r * Выполняйте домашнее задание в отдельной ветке проекта на GitHub.  \r * В поле для сдачи работы прикрепите ссылку на ваш проект в Git.  \r * На проверку можно отправить как все задачи вместе, так и каждую задачу по отдельности.  \r * Во время проверки вашей домашней работы по частям будет стоять статус «На доработке».  \r * Любые вопросы по решению задач можете задавать в чате учебной группы.",
+  "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "node src/index.js",
+    "start": "node index.js",
     "build": "tsc --project ./tsconfig.json --watch",
     "eslint": "eslint --cache **/*{.js,.jsx,.ts,.tsx}",
     "eslint:dump": "eslint --print-config ./eslint.config.mjs"

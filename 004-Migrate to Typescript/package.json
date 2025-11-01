@@ -1,16 +1,17 @@
 {
-  "name": "003-ioc",
+  "name": "004-migratetotypescript",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dest/index.js",
   "scripts": {
-    "dev": "nodemon -L",
-    "build": "tsc --project ./tsconfig.json --watch",
-    "env": "node -r dotenv/config index.js"
+    "start": "node dest/index.js",
+    "dev": "nodemon dest/index.js",
+    "build": "tsc --project ./tsconfig.json --watch"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "body-parser": "^2.2.0",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "inversify": "^7.10.4",
@@ -21,9 +22,8 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
-    "dotenv": "^16.4.5",
+    "@types/multer": "^2.0.0",
     "nodemon": "^3.1.4",
     "typescript": "^5.9.3"
-  },
-  "keywords": []
+  }
 }

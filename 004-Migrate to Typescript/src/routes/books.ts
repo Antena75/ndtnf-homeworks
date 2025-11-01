@@ -1,12 +1,13 @@
 import express from 'express'
-import { Book } from '../classes/TBook'
+const router = express.Router()
+
+import Book from '../classes/TBook'
 import { container } from '../container'
 import { BooksRepository } from '../classes/BooksRepository'
 
-const router = express.Router()
-const bookrep = container.get(BooksRepository)
-
 router.get('/books', async (req: any, res) => {
+    const bookrep = container.get(BooksRepository)
+
     try {
         const books = await bookrep.getBooks()
 
@@ -28,9 +29,13 @@ router.get('/books/create', (req: any, res) => {
     })
 })
 
-router.post('/books/create', async (req: any, res) => {
+router.post('/books/create',
+    async (req: any, res) => {
+
     const {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body
+
     const book = new Book (title, description, authors, favorite, fileCover, fileName, fileBook)
+    const bookrep = container.get(BooksRepository)
 
     try {
         const books = await bookrep.createBook(book)
@@ -42,6 +47,7 @@ router.post('/books/create', async (req: any, res) => {
 
 router.get('/books/:id', async (req: any, res) => {
     const {id} = req.params
+    const bookrep = container.get(BooksRepository)
 
     try {
         const book = await bookrep.getBook(id)
@@ -61,6 +67,8 @@ router.get('/books/:id', async (req: any, res) => {
 router.get('/books/update/:id', async (req: any, res) => {
     const {id} = req.params
 
+    const bookrep = container.get(BooksRepository)
+
     try {
         const book = await bookrep.getBook(id)
 
@@ -77,6 +85,9 @@ router.get('/books/update/:id', async (req: any, res) => {
 router.post('/books/update/:id', async (req, res) => {
     const {id} = req.params
     const {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body
+    const favorite_bool = favorite === 'on' ? true: false
+
+    const bookrep = container.get(BooksRepository)
 
     try {   
         const book = await bookrep.updateBook(id, title, description, authors, favorite, fileCover, fileName, fileBook)
@@ -93,8 +104,10 @@ router.post('/books/update/:id', async (req, res) => {
 router.post('/books/delete/:id', async (req, res) => {
     const {id} = req.params
 
+    const bookrep = container.get(BooksRepository)
+
     try {
-        const book = await bookrep.deleteBook(id)
+        const book = bookrep.deleteBook(id)
 
         res.redirect(`/books`); 
     } catch (e) {
@@ -102,4 +115,4 @@ router.post('/books/delete/:id', async (req, res) => {
     }      
 })
 
-module.exports = router
+export = router
