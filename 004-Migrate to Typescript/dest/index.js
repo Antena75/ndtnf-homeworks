@@ -55,7 +55,6 @@ app.set('view engine', 'ejs');
 app.use('/', index_1.default);
 app.use('/', books_2.default);
 app.use(error_1.default);
-//const preload = require('./library/books')
 function start(PORT, MONGODB_URL) {
     return __awaiter(this, void 0, void 0, function () {
         var e_1;

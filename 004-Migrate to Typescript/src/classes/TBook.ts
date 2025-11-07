@@ -1,5 +1,5 @@
-import { v4 as uuid } from 'uuid';
 import { IBook } from './IBook';
+import mongoose from 'mongoose'
 
 class Book implements IBook{
     
@@ -10,7 +10,7 @@ class Book implements IBook{
     fileCover: string;
     fileName: string;
     fileBook: string;
-    id: string;
+    id: mongoose.Types.ObjectId;
 
     constructor(
             title: string,
@@ -20,7 +20,7 @@ class Book implements IBook{
             fileCover: string,
             fileName: string,
             fileBook: string,
-            id: string = uuid()){
+            id?: mongoose.Types.ObjectId){
         
         this.title = title;
         this.description = description;

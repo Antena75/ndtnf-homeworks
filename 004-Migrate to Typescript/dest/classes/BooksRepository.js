@@ -73,11 +73,11 @@ var BooksRepository = /** @class */ (function () {
                         return [4 /*yield*/, newBook.save()];
                     case 2:
                         _a.sent();
-                        return [2 /*return*/, book];
+                        return [3 /*break*/, 4];
                     case 3:
                         e_1 = _a.sent();
                         console.log(e_1);
-                        return [2 /*return*/, null];
+                        return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -85,7 +85,7 @@ var BooksRepository = /** @class */ (function () {
     };
     BooksRepository.prototype.getBook = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var dbBook, title, description, authors, favorite, fileCover, fileName, fileBook, book, e_2;
+            var dbBook, title, description, authors, favorite, fileCover, fileName, fileBook, _id, book, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -93,9 +93,8 @@ var BooksRepository = /** @class */ (function () {
                         return [4 /*yield*/, books_1.default.findById(id).select('-__v')];
                     case 1:
                         dbBook = _a.sent();
-                        title = dbBook.title, description = dbBook.description, authors = dbBook.authors, favorite = dbBook.favorite, fileCover = dbBook.fileCover, fileName = dbBook.fileName, fileBook = dbBook.fileBook;
-                        book = new TBook_1.default(title, description, authors, favorite, fileCover, fileName, fileBook);
-                        console.log(book);
+                        title = dbBook.title, description = dbBook.description, authors = dbBook.authors, favorite = dbBook.favorite, fileCover = dbBook.fileCover, fileName = dbBook.fileName, fileBook = dbBook.fileBook, _id = dbBook._id;
+                        book = new TBook_1.default(title, description, authors, favorite, fileCover, fileName, fileBook, _id);
                         return [2 /*return*/, book];
                     case 2:
                         e_2 = _a.sent();
@@ -108,7 +107,7 @@ var BooksRepository = /** @class */ (function () {
     };
     BooksRepository.prototype.getBooks = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var dbBooks, books, i, _a, title, description, authors, favorite, fileCover, fileName, fileBook, book, e_3;
+            var dbBooks, books, i, _a, title, description, authors, favorite, fileCover, fileName, fileBook, _id, book, e_3;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -119,8 +118,8 @@ var BooksRepository = /** @class */ (function () {
                         books = [];
                         i = void 0;
                         for (i = 0; i < dbBooks.length; i++) {
-                            _a = dbBooks[i], title = _a.title, description = _a.description, authors = _a.authors, favorite = _a.favorite, fileCover = _a.fileCover, fileName = _a.fileName, fileBook = _a.fileBook;
-                            book = new TBook_1.default(title, description, authors, favorite, fileCover, fileName, fileBook);
+                            _a = dbBooks[i], title = _a.title, description = _a.description, authors = _a.authors, favorite = _a.favorite, fileCover = _a.fileCover, fileName = _a.fileName, fileBook = _a.fileBook, _id = _a._id;
+                            book = new TBook_1.default(title, description, authors, favorite, fileCover, fileName, fileBook, _id);
                             books.push(book);
                         }
                         return [2 /*return*/, books];
@@ -150,15 +149,16 @@ var BooksRepository = /** @class */ (function () {
                         return [4 /*yield*/, books_1.default.findByIdAndUpdate(id, { title: title, description: description, authors: authors, favorite: favorite, fileCover: fileCover, fileName: fileName, fileBook: fileBook })];
                     case 3:
                         _a.sent();
-                        return [2 /*return*/, book];
+                        return [3 /*break*/, 5];
                     case 4:
                         e_4 = _a.sent();
-                        return [2 /*return*/, null];
+                        console.log(e_4);
+                        return [3 /*break*/, 5];
                     case 5: return [3 /*break*/, 7];
                     case 6:
                         e_5 = _a.sent();
                         console.log(e_5);
-                        return [2 /*return*/, null];
+                        return [3 /*break*/, 7];
                     case 7: return [2 /*return*/];
                 }
             });

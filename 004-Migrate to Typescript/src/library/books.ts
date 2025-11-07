@@ -4,7 +4,7 @@ const stor = {
     books: [
         new Book(
             "Понедельник начинается в субботу", 
-            "Класическое фэнтези",
+            "Классическое фэнтези",
             "Братья Стругацкие",
             true,
             "Monday Begins on Saturday.jpg",
@@ -24,10 +24,10 @@ const stor = {
 import Books from '../models/books'
 
 function preloadBook(book: Book){
-    console.log(book)
 
     const {title, description, authors, favorite, fileCover, fileName, fileBook} = book
     const newBook = new Books({title, description, authors, favorite, fileCover, fileName, fileBook})
+    console.log(newBook)
     
     try {
         newBook.save()

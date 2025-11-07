@@ -39,33 +39,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var express_1 = __importDefault(require("express"));
-var router = express_1.default.Router();
 var TBook_1 = __importDefault(require("../classes/TBook"));
 var container_1 = require("../container");
 var BooksRepository_1 = require("../classes/BooksRepository");
+var router = express_1.default.Router();
+var bookrep = container_1.container.get(BooksRepository_1.BooksRepository);
 router.get('/books', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var bookrep, books, e_1;
+    var books, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                bookrep = container_1.container.get(BooksRepository_1.BooksRepository);
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
+                _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, bookrep.getBooks()];
-            case 2:
+            case 1:
                 books = _a.sent();
                 res.render("books/index", {
                     title: "Список книг",
                     user: req.user,
                     books: books,
                 });
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 3];
+            case 2:
                 e_1 = _a.sent();
                 res.status(500).json(e_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); });
@@ -77,13 +75,13 @@ router.get('/books/create', function (req, res) {
     });
 });
 router.post('/books/create', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, title, description, authors, favorite, fileCover, fileName, fileBook, book, bookrep, books, e_2;
+    var _a, title, description, authors, favorite, fileCover, fileName, fileBook, favoriteBl, book, books, e_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _a = req.body, title = _a.title, description = _a.description, authors = _a.authors, favorite = _a.favorite, fileCover = _a.fileCover, fileName = _a.fileName, fileBook = _a.fileBook;
-                book = new TBook_1.default(title, description, authors, favorite, fileCover, fileName, fileBook);
-                bookrep = container_1.container.get(BooksRepository_1.BooksRepository);
+                favoriteBl = (favorite == 'true');
+                book = new TBook_1.default(title, description, authors, favoriteBl, fileCover, fileName, fileBook);
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
@@ -101,12 +99,11 @@ router.post('/books/create', function (req, res) { return __awaiter(void 0, void
     });
 }); });
 router.get('/books/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, bookrep, book, e_3;
+    var id, book, e_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
-                bookrep = container_1.container.get(BooksRepository_1.BooksRepository);
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
@@ -130,12 +127,11 @@ router.get('/books/:id', function (req, res) { return __awaiter(void 0, void 0, 
     });
 }); });
 router.get('/books/update/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, bookrep, book, e_4;
+    var id, book, e_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
-                bookrep = container_1.container.get(BooksRepository_1.BooksRepository);
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
@@ -157,14 +153,12 @@ router.get('/books/update/:id', function (req, res) { return __awaiter(void 0, v
     });
 }); });
 router.post('/books/update/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, _a, title, description, authors, favorite, fileCover, fileName, fileBook, favorite_bool, bookrep, book, e_5;
+    var id, _a, title, description, authors, favorite, fileCover, fileName, fileBook, book, e_5;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 id = req.params.id;
                 _a = req.body, title = _a.title, description = _a.description, authors = _a.authors, favorite = _a.favorite, fileCover = _a.fileCover, fileName = _a.fileName, fileBook = _a.fileBook;
-                favorite_bool = favorite === 'on' ? true : false;
-                bookrep = container_1.container.get(BooksRepository_1.BooksRepository);
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
@@ -184,18 +178,25 @@ router.post('/books/update/:id', function (req, res) { return __awaiter(void 0, 
     });
 }); });
 router.post('/books/delete/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, bookrep, book;
+    var id, book, e_6;
     return __generator(this, function (_a) {
-        id = req.params.id;
-        bookrep = container_1.container.get(BooksRepository_1.BooksRepository);
-        try {
-            book = bookrep.deleteBook(id);
-            res.redirect("/books");
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, bookrep.deleteBook(id)];
+            case 2:
+                book = _a.sent();
+                res.redirect("/books");
+                return [3 /*break*/, 4];
+            case 3:
+                e_6 = _a.sent();
+                res.redirect('/404');
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
-        catch (e) {
-            res.redirect('/404');
-        }
-        return [2 /*return*/];
     });
 }); });
 module.exports = router;

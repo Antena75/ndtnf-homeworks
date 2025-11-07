@@ -6,8 +6,7 @@ import Books from '../models/books'
 
 @injectable()
 export class BooksRepository{
-    async createBook(book: IBook):Promise<IBook> {        
-
+    async createBook(book: IBook):Promise<void> {        
         const newBook = new Books({
             title: book.title,
             description: book.description,
@@ -20,20 +19,16 @@ export class BooksRepository{
     
         try {
             await newBook.save()
-            return book
         } catch (e) {
             console.log(e)
-            return null
         }        
     }
 
     async getBook(id: string):Promise<IBook> {
-
         try {
             const dbBook = await Books.findById(id).select('-__v')
-            const {title, description, authors, favorite, fileCover, fileName, fileBook} = dbBook
-            const book = new Book (title, description, authors, favorite, fileCover, fileName, fileBook)
-            console.log(book)
+            const {title, description, authors, favorite, fileCover, fileName, fileBook, _id} = dbBook
+            const book = new Book (title, description, authors, favorite, fileCover, fileName, fileBook, _id)
             return book
         } catch (e) { 
             console.log(e)
@@ -47,8 +42,8 @@ export class BooksRepository{
             let books: Book[] = []
             let i: number
             for (i = 0; i < dbBooks.length; i++ ){
-                const {title, description, authors, favorite, fileCover, fileName, fileBook} = dbBooks[i]
-                const book = new Book (title, description, authors, favorite, fileCover, fileName, fileBook)
+                const {title, description, authors, favorite, fileCover, fileName, fileBook, _id} = dbBooks[i]
+                const book = new Book (title, description, authors, favorite, fileCover, fileName, fileBook, _id)
                 books.push(book)          
             }
             return books;
@@ -66,7 +61,7 @@ export class BooksRepository{
         favorite: boolean,
         fileCover: string,
         fileName: string,
-        fileBook: string):Promise<IBook> {
+        fileBook: string):Promise<void> {
        
         try {
             const dbBook = await Books.findById(id).select('-__v')
@@ -74,19 +69,15 @@ export class BooksRepository{
 
             try {
                 await Books.findByIdAndUpdate(id, {title, description, authors, favorite, fileCover, fileName, fileBook})
-
-                return book
             } catch (e) {
-                return null
+                console.log(e)
             } 
         } catch (e) {
             console.log(e)
-            return null
         }  
     }
 
     async deleteBook(id: string):Promise<void> {
-
         try {
             const dbBook = await Books.findById(id).select('-__v')
 
@@ -96,10 +87,8 @@ export class BooksRepository{
             await Books.deleteOne({_id: id})
 
             console.log("Book deleted")
-            // return book
         } catch (e) {
             console.log(e)
-            // return null
         }   
     }
 }

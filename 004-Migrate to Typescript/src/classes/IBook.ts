@@ -1,3 +1,5 @@
+import mongoose from 'mongoose'
+
 export interface IBook{
     title: string;
     description: string;
@@ -6,5 +8,5 @@ export interface IBook{
     fileCover: string;
     fileName: string;
     fileBook: string;
-    id: string; 
+    id?: mongoose.Types.ObjectId;
 }

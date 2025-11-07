@@ -15,13 +15,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // app.set("views","src/views")
 app.set('view engine', 'ejs')
 
-
 app.use('/', indexRouter)
 app.use('/', booksRouter)
 
 app.use(errorMiddleware);
-
-//const preload = require('./library/books')
 
 async function start(PORT: string | number, MONGODB_URL: string) {
     try {
@@ -34,8 +31,6 @@ async function start(PORT: string | number, MONGODB_URL: string) {
 
     }
 }
-
-
 
 import MONGODB_URL from './config/mongo.config'
 import PORT from './config/server.config'
