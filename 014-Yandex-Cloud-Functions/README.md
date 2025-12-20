@@ -1,19 +1,29 @@
+# Домашнее задание к занятию «3.2. Yandex Cloud Functions»
+
+**Правила выполнения домашней работы.**
+* Выполняйте домашнее задание в отдельной ветке проекта на GitHub.
+* В поле для сдачи работы прикрепите ссылку на ваш проект в Git.
+* На проверку можно отправить как все задачи вместе, так и каждую задачу по отдельности. 
+* Во время проверки вашей домашней работы по частям будет стоять статус «На доработке».
+* Любые вопросы по решению задач можете задавать в чате учебной группы.
+
+**Выполните задания.**
+
 **Задание 1.**
 
-Изучите инструкцию, как начать работать с [Yandex Cloud Functions](https://yandex.cloud/ru/docs/functions/).
+Изучите инструкцию, как начать работать с [Yandex Cloud Functions](https://cloud.yandex.ru/docs/functions/).
 
 **Задание 2.**
 
-Используя Yandex Cloud Functions, реализуйте описанную бизнес-логику:
+Используя Yandex Cloud Functions, реализуйте описанную бизнес-логику:   
 
-| Метод     | URL                     | Действие                     | Комментарий                                    |
-| --------- | ----------------------- | ---------------------------- | ---------------------------------------------- |
-| ```GET``` | ```/api/characters```   | Получить всех персонажей     | Получаем массив всех персонажей                |
-| ```GET``` | ```/api/character/id``` | Получить персонажа по **ID** | Получаем объект персонажа, если запись «не найдено», вернём **Code: 404** |
+Метод | URL | Действие | Комментарий
+--- | --- | ---  | ---
+`GET` | `/api/characters` | Получить всех персонажей | Получаем массив всех персонажей
+`GET` | `/api/character?id=1` | Получить персонажа по **ID** | Получаем объект персонажа, если запись «не найдено», вернём **Code: 404** 
 
 Структура объекта персонажа:
-
-```javascript
+```json
 {
     id: 1,
     name: "Имя персонажа",
@@ -29,14 +39,16 @@
 }
 ```
 
-:white_check_mark: РЕШЕНИЕ:
+РЕШЕНИЕ:
 Получить всех персонажей 
-https://d5dj5329pr4ld7o95cbj.apigw.yandexcloud.net/api/characters
+https://d5d320tf32itp1vtqkna.g3ab4gln.apigw.yandexcloud.net/api/films
 Получить персонажа по **ID**
-https://d5dj5329pr4ld7o95cbj.apigw.yandexcloud.net/api/characters?id=3
+https://d5d320tf32itp1vtqkna.g3ab4gln.apigw.yandexcloud.net/api/films?id=2
 
-**Задание 3 (необязательное).**
 
-- Изучите инструкции, как начать работать с инструментами [Managed Service for MongoDB](https://yandex.cloud/ru/docs/managed-mongodb/quickstart) и [Managed Service for PostgreSQL](https://yandex.cloud/ru/docs/managed-postgresql/quickstart?utm_source=console).
-- Выберите один из этих инструментов в качестве основного.
-- Создайте кластер выбранной БД и реализуйте хранение данных и персонажах в БД.
+**Задание 3** (необязательное).
+
+* Изучите инструкции, как начать работать с инструментами [Managed Service for MongoDB](https://cloud.yandex.ru/docs/managed-mongodb/quickstart) и [Managed Service for PostgreSQL](https://cloud.yandex.ru/docs/managed-postgresql/quickstart?utm_source=console). 
+* Выберите один из этих инструментов в качестве основного. 
+* Создайте кластер выбранной БД и реализуйте хранение данных и персонажах в БД.
+
